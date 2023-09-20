@@ -7,3 +7,7 @@
 [2.parse_operation](parsefunction.md)
 
 [3.Xpath_example](parsefunction.Xpath.md)
+
+流程图：
+
+![](./assets/storeplace.jpg)
