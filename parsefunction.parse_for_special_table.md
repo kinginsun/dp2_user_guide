@@ -1,5 +1,7 @@
 **按列标题提取表格数据（列数固定，行数可变）**
 
+###### 示例1:
+
 ```json
 {
   "elements": {
@@ -34,6 +36,53 @@
 5. title_column中也可以设定title所在列的序号title_index（默认0），以及content中所在列的序号content_index（默认1）
 6. 每个字段中的col可以设定为相当于内容单元格的相对路径，以”./“开头；若不是”./“开头，则认为是全局的路径
 7. fields中的字段，可以通过name确定row_index，也可以直接指定row_index
+
+###### 示例2:
+
+解析第一列为title的表格
+
+```json
+"table2": {
+      "rows": "(//div[@class='listmain']/div/table/tbody/tr)[position()>1]",
+      "cells": "./td",
+      "title_column": {
+        "fields": {
+          "dp2_id": {
+            "col": "TASK_id"
+          },
+          "gcid": {
+            "col": "TASK_url",
+            "function": {
+              "regexp": "Id=(\\d+)$",
+              "return": [
+                0
+              ],
+              "type": "string"
+            }
+          },
+          "auth_num": {
+            "name": "批准文号",
+            "col": "."
+          },
+          "drug_name": {
+            "name": "产品名称"
+          },
+          "drug_name_en": {
+            "name": "英文名称"
+          }
+        }
+      }
+    }
+```
+
+- 通过rows, cells, title_column确定一个表格
+- rows 指定所有行所在的路径，用position()排除不需要的行
+- cells 指定每行中每个元素的相对路径
+- title_column 指定每行的字段名称和对应的title内容，放在fields中
+- 若不设定fields，则自动用第一列的名字作为字段名
+- fields中字段同elements的字段一样，用col指定路径，支持function, callback等
+- 若字段名字的路径不是默认的“.”，则需显式设定col
+- 相比于elements的字段，多了name，用于指定字段的名称，用于匹配行
 
 **按第一行标题提取表格数据（列数不固定，行数可变）**
 
