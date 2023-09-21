@@ -84,6 +84,12 @@
 - 若字段名字的路径不是默认的“.”，则需显式设定col
 - 相比于elements的字段，多了name，用于指定字段的名称，用于匹配行
 
+示例3:
+
+![image-20230921103240151](assets/image-20230921103240151.png)
+
+DP2_id:32134845,字段名：REACH_Registration_Evaluation_Authorisation_and_Restriction_of_Chemicals_Regulation
+
 **按第一行标题提取表格数据（列数不固定，行数可变）**
 
 ```json
@@ -126,3 +132,42 @@
 4. title_row为字串时，即为标题行所在的路径，默认用标题中文字作为每个字段的名字
 5. title_row为dict时，col指定标题行路径（要指定到具体标题名字的位置），fields指定每个字段的名字和相对路径，默认为”."
 6. fields中的设置方法与前相同，name指定标题的名字，需完全匹配，col指定相对路径, col_index指定时，则用这个序号，忽略name; 若无col_index时，根据name确定col_index
+
+Parse function:
+
+```json
+   "REACH_Registration_Evaluation_Authorisation_and_Restriction_of_Chemicals_Regulation": {
+      "elements": {
+        "list": {
+          "rows": "//div[@class='dissProcessesWrapper']//div[@class='panel-group '][1]//div[@class='anothercustomBox']//li",
+          "cells": "./div/div",
+          "title_row":"//div[@class='dissProcessesWrapper']//div[@class='panel-group '][1]//div[@class='anothercustomBox']//li/div/div[1]"
+          }
+        }
+    },
+```
+
+Result:
+
+```json
+"REACH_Registration_Evaluation_Authorisation_and_Restriction_of_Chemicals_Regulation": {
+    "list": [
+      {
+        "Annex III: criteria for 1 - 10 tonne registered substances": "Annex III: criteria for 1 - 10 tonne registered substances",
+        "Pre-registered substances": "Substances predicted as likely to meet criteria for category 1A or 1B carcinogenicity, mutagenicity, or reproductive toxicity, or with dispersive or diffuse use(s) where predicted likely to meet any classification criterion for health or environmental hazards, or where there is a nanoform soluble in biological and environmental media.",
+        "Registered substances factsheets": ""
+      },
+      {
+        "Annex III: criteria for 1 - 10 tonne registered substances": "Pre-registered substances",
+        "Pre-registered substances": "Substances indicated, in 2009, as being intended to be registered by at least one company in the EEA.",
+        "Registered substances factsheets": ""
+      },
+      {
+        "Annex III: criteria for 1 - 10 tonne registered substances": "Registered substances factsheets",
+        "Pre-registered substances": "Substances which have been registered and can be placed on the EEA market by those companies with a valid registration.",
+        "Registered substances factsheets": ""
+      }
+    ]
+  },
+```
+

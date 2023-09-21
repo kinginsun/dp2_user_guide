@@ -72,7 +72,7 @@
 3. 数据更新后通知：notification
 
 ```json
-notification:{
+{notification:{
 
   type:"openid, email",
 
@@ -80,6 +80,7 @@ notification:{
 
    content:"{keyword}" // 支持变量替换
 
+}
 }
 ```
 
