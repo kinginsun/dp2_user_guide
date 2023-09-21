@@ -14,7 +14,7 @@
 
 dp2抽象流程图:
 
-<img src="./assets/file.png" style="zoom:50"/>
+<img src="./assets/file.png" style="zoom:70"/>
 
 
 
